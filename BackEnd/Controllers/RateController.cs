@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using BackEnd.DTO;
 using BackEnd.Models;
@@ -12,16 +14,21 @@ namespace BackEnd.Controllers
     [Route("api/[controller]")]
     public class RateController : ControllerBase
     {
-        private static ExchangeRate exchangeRate =new ExchangeRate( 0, "GBP", "NGN");
-        public RateController()
+        private readonly HttpClient _httpClient;
+        private static ExchangeRate exchangeRate =new ExchangeRate( 2200, "GBP", "NGN");
+        public RateController(HttpClient httpClient)
         {
- 
+            _httpClient = httpClient;
         }
+       
         [HttpGet("get-rate")]
-        public IActionResult GetRate()
-        {
-            var rateToReturn = exchangeRate.GetRate();
-            return Ok(rateToReturn);
+        public async Task<IActionResult> GetRate()
+        { 
+            
+            { 
+            var response = await _httpclient.GetVeloremitRate(RateDTO);
+            return Ok(response);
+          
         }
         [HttpPost("set-rate")]
         public IActionResult SetRate([FromBody] ExchangeRateDTO exchangeRateDTO)
@@ -38,4 +45,6 @@ namespace BackEnd.Controllers
             });
         }
     }
-}
+
+         
+} 

@@ -23,6 +23,7 @@ public class Program
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         _ = builder.Services.AddEndpointsApiExplorer();
         _ = builder.Services.AddSwaggerGen();
+        _ = builder.Services.AddHttpClient();
 
         var app = builder.Build();
 

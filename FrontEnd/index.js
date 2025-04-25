@@ -1,5 +1,5 @@
 let rate = 0;
-const baseUrl = 'https://localhost:7080';
+const baseUrl = 'http://localhost:5188';
 
 
 async function init() {  
@@ -7,7 +7,8 @@ async function init() {
 
   const rateResponse =await getRateAPIResponse.json();
   
-  rate = rateResponse.rate;
+  const rate = rateResponse.data.exchangeRate;
+
   
   const exchangeRate =document.getElementById('exchange-rate');
   
