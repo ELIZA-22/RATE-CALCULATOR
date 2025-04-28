@@ -1,6 +1,8 @@
 
 using System;
 using System.Linq;
+using BackEnd.Services.Implementation;
+using BackEnd.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +26,7 @@ public class Program
         _ = builder.Services.AddEndpointsApiExplorer();
         _ = builder.Services.AddSwaggerGen();
         _ = builder.Services.AddHttpClient();
-
+        builder.Services.AddScoped<IVeloremitService, VeloremitService>();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
